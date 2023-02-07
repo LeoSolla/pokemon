@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../../components/Sidebar';
 import Modal from '../../components/Modal';
+import Ash from '../../components/Ash';
 
 const MapPage = () => {
 
@@ -11,6 +12,7 @@ const MapPage = () => {
                 <Modal>
                     <div style={{ height: '30rem', width: '30rem' }} />
                 </Modal>
+                <Ash />
             </div>
         </>
     );
