@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import closeIcon from '../assets/images/close.png';
 
-const Modal = ({ children }) => {
+const Modal = ({ pokemon }) => {
     const [isOpen, setIsOpen] = useState(true);
     const modalRef = useRef(null);
 
@@ -20,15 +19,12 @@ return (
     <div className="modal" onClick={handleClose}>
         <div className="modal__content" ref={modalRef}>
             <img className="modal__close" src={closeIcon} alt="Fechar" onClick={handleClose}/>
-            {children}
+            <div style={{ height: '30rem', width: '30rem' }}>
+                <p>{pokemon[0].name}</p>
+            </div>
         </div>
     </div>
     );
-};
-
-
-Modal.propTypes = {
-    children: PropTypes.node.isRequired,
 };
 
 export default Modal;
