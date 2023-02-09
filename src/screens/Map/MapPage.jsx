@@ -8,7 +8,6 @@ const MapPage = () => {
         <>
             <div className="map">
                 <Sidebar />
-
                 <Ash />
             </div>
         </>

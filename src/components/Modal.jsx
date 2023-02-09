@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import closeIcon from '../assets/images/close.png';
+import NumberInput from './NumberInput';
 
 const Modal = ({ pokemon }) => {
     const [isOpen, setIsOpen] = useState(true);
@@ -21,6 +22,9 @@ return (
             <img className="modal__close" src={closeIcon} alt="Fechar" onClick={handleClose}/>
             <div style={{ height: '30rem', width: '30rem' }}>
                 <p>{pokemon[0].name}</p>
+                <div>
+                    <NumberInput />
+                </div>
             </div>
         </div>
     </div>
