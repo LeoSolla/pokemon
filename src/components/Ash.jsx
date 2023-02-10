@@ -16,14 +16,16 @@ const Ash = () => {
         const result = queryResult.data.data;
             setData({ pokemon: result.pokemon });
             setShowModal(true);
+
+            return false
     };
 
     return (
         <div className="ash">
             <div className="person" onClick={fecthData}>
-            {showModal && 
-                <Modal pokemon={data.pokemon} />
-            }
+            {showModal && (
+                <Modal pokemon={data.pokemon} openModal={showModal} close={() => setShowModal(false)} />
+            )}
             {console.log(data)}
             </div>
         </div>
