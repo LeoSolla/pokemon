@@ -1,39 +1,42 @@
-import React, { useState, useCallback } from 'react';
+import React, { } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { addPokemon } from '../features/Pokemons';
+import NumberInput from './NumberInput';
 import * as yup from "yup";
 import closeIcon from '../assets/images/close.png';
 import Button from './Button';
+import PokeData from '../data/PokeData';
+import TextInput from './TextInput';
+import Dropdown from './Dropdown';
 
 const schema = yup.object({
-    nome: yup.string().required("O Nome é obrigatório."),
+    name: yup.string().required("O Nome é obrigatório."),
     hp: yup.string().required("O HP é obrigatório."),
-    peso: yup.string().required("O Peso é obrigatório."),
-    altura: yup.string().required("A Altura é obrigatória."),
-    habilidade1: yup.string().required("A Habilidade é obrigatória."),
-    habilidade2: yup.string().required("A Habilidade é obrigatória."),
-    habilidade3: yup.string().required("A Habilidade é obrigatória."),
-    habilidade4: yup.string().required("A Habilidade é obrigatória."),
-    defesa: yup.string().required("A Defesa é obrigatória."),
-    ataque: yup.string().required("O Ataque é obrigatório."),
-    defesaespecial: yup.string().required("A Desefa Especial é obrigatória."),
-    ataqueespecial: yup.string().required("O Ataque Especial é obrigatório."),
-    velocidade: yup.string().required("A Velocidade é obrigatória."),
+    height: yup.string().required("O Peso é obrigatório."),
+    weight: yup.string().required("A Altura é obrigatória."),
+    ability1: yup.string().required("A Habilidade é obrigatória."),
+    ability2: yup.string().required("A Habilidade é obrigatória."),
+    ability3: yup.string().required("A Habilidade é obrigatória."),
+    ability4: yup.string().required("A Habilidade é obrigatória."),
+    defense: yup.string().required("A Defesa é obrigatória."),
+    attack: yup.string().required("O Ataque é obrigatório."),
+    specialdefense: yup.string().required("A Desefa Especial é obrigatória."),
+    specialattack: yup.string().required("O Ataque Especial é obrigatório."),
+    velocity: yup.string().required("A Velocidade é obrigatória."),
   }).required();
 
-const ModalNewPokemon = ({ open, close, initialValues = {} }) => {
-    const [inputs, setInputs] = useState(initialValues);
-    const onChangeHandler = useCallback(
-        ({target:{name,value}}) => setInputs(state => ({ ...state, [name]:value }), [])
-    );
-
+const ModalNewPokemon = ({ open, close }) => {
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
-      });
-    const onSubmit = data => console.log(data);
+    });
+    
+    const onSubmit = (data) => {
+        console.log(data);
+        dispatch(addPokemon(PokeData(data)));
+    }
 
 return (
     <>
@@ -60,26 +63,16 @@ return (
                     <div className="newModal__formContent">
                         <div className="newModal__formPokemon">
                             <div className="newModal__field">
-                                <label>Nome</label>
-                                    <input type="text" placeholder="Nome" key="nome" {...register("nome")} onChange={onChangeHandler} value={inputs.key} />
-                                <span>{errors.nome?.message}</span>
-                                {console.log(errors)}
-                            </div>
-
+                                <TextInput name="name" placeholder="Nome" label="Nome" register={register} errors={errors}/>
+                            </div>                            
                             <div className="newModal__field">
-                                <label>HP</label>
-                                <input type="number" placeholder="HP" key="hp" {...register("hp")} onChange={onChangeHandler} value={inputs.key}/>
-                                <span>{errors.hp?.message}</span>
+                                <NumberInput name="hp" placeholder="HP" label="Hp" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <label>Peso</label>
-                                <input type="number" placeholder="Peso" key="peso" {...register("peso")} onChange={onChangeHandler} value={inputs.key}/>
-                                <span>{errors.peso?.message}</span>
+                                <NumberInput name="height" placeholder="Peso" label="Peso" suffix="Kg" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <label>Altura</label>
-                                <input type="number" placeholder="Altura" key="altura" {...register("altura")} onChange={onChangeHandler} value={inputs.key}/>
-                                <span>{errors.altura?.message}</span>
+                                <NumberInput name="weight" placeholder="Altura" label="Altura" suffix="Cm" register={register} errors={errors}/>
                             </div>
                         </div>
 
@@ -92,9 +85,7 @@ return (
 
                         <div className="newModal__formType">
                             <div className="newModal__field">
-                                <select>
-                                    <option value="0">Selecione o(s) tipo(s)</option>
-                                </select>
+                               <Dropdown />
                             </div>
                         </div>
 
@@ -106,20 +97,16 @@ return (
 
                         <div className="newModal__formAbilities">
                             <div className="newModal__field">
-                                <input type="text" placeholder="Habilidade 1" {...register("habilidade1")} />
-                                <span className="abilityError">{errors.habilidade1?.message}</span>
+                                <TextInput name="ability1" placeholder="Habilidade 1" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <input type="text" placeholder="Habilidade 2" {...register("habilidade2")} />
-                                <span className="abilityError">{errors.habilidade2?.message}</span>
+                                <TextInput name="ability2" placeholder="Habilidade 2" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <input type="text" placeholder="Habilidade 3" {...register("habilidade3")} />
-                                <span className="abilityError">{errors.habilidade3?.message}</span>
+                                <TextInput name="ability3" placeholder="Habilidade 3" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <input type="text" placeholder="Habilidade 4" {...register("habilidade4")} />
-                                <span className="abilityError">{errors.habilidade4?.message}</span>
+                                <TextInput name="ability4" placeholder="Habilidade 4" register={register} errors={errors}/>
                             </div>
                         </div>
 
@@ -131,44 +118,19 @@ return (
 
                         <div className="newModal__formStatistics">
                             <div className="newModal__field">
-                                <svg className="statistics" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16.5894 2.94199L9.83877 0.129214C9.63314 0.0439093 9.4127 0 9.19008 0C8.96745 0 8.74702 0.0439093 8.54138 0.129214L1.79073 2.94199C1.16137 3.20217 0.75 3.81746 0.75 4.49956C0.75 11.4788 4.77578 16.3027 8.53787 17.8708C8.95275 18.0431 9.42037 18.0431 9.83526 17.8708C12.8484 16.6156 17.6266 12.2804 17.6266 4.49956C17.6266 3.81746 17.2153 3.20217 16.5894 2.94199Z" fill="#2E3A59"/>
-                                </svg>
-                                <label>Defesa</label>
-                                <input type="number" placeholder="00" {...register("defesa")} />
-                                <span>{errors.defesa?.message}</span>
+                                <NumberInput name="defense" placeholder="00" label="Defesa" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <svg className="statistics" width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.0626 4.50004H8.12508V0.562505C8.12508 0.251721 7.87336 0 7.56257 0H6.43756C6.12678 0 5.87505 0.251721 5.87505 0.562505V4.50004H1.93752C1.00552 4.50004 0.25 5.25556 0.25 6.18756C0.25 7.11956 1.00552 7.87508 1.93752 7.87508C2.67123 7.87508 3.28929 7.40398 3.52167 6.75007H10.4785C10.7108 7.40398 11.3289 7.87508 12.0626 7.87508C12.9946 7.87508 13.7501 7.11956 13.7501 6.18756C13.7501 5.25556 12.9946 4.50004 12.0626 4.50004ZM4.75004 15.0766L6.53213 17.7495C6.75467 18.0835 7.24546 18.0835 7.46835 17.7495L9.25009 15.0766V7.87508H4.75004V15.0766Z" fill="#2E3A59"/>
-                                </svg>
-                                <label>Ataque</label>
-                                <input type="number" placeholder="00" {...register("ataque")} />
-                                <span>{errors.ataque?.message}</span>
+                                <NumberInput name="attack" placeholder="00" label="Ataque" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <svg className="statistics" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16.5894 2.94199L9.83877 0.129214C9.63314 0.0439093 9.4127 0 9.19008 0C8.96745 0 8.74702 0.0439093 8.54138 0.129214L1.79073 2.94199C1.16137 3.20217 0.75 3.81746 0.75 4.49956C0.75 11.4788 4.77578 16.3027 8.53787 17.8708C8.95275 18.0431 9.42037 18.0431 9.83526 17.8708C12.8484 16.6156 17.6266 12.2804 17.6266 4.49956C17.6266 3.81746 17.2153 3.20217 16.5894 2.94199Z" fill="#2E3A59"/>
-                                </svg>
-                                <label>Defesa especial</label>
-                                <input type="number" placeholder="00" {...register("defesaespecial")} />
-                                <span>{errors.defesaespecial?.message}</span>
+                                <NumberInput name="specialdefense" placeholder="00" label="Defesa especial" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <svg className="statistics" width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.0626 4.50004H8.12508V0.562505C8.12508 0.251721 7.87336 0 7.56257 0H6.43756C6.12678 0 5.87505 0.251721 5.87505 0.562505V4.50004H1.93752C1.00552 4.50004 0.25 5.25556 0.25 6.18756C0.25 7.11956 1.00552 7.87508 1.93752 7.87508C2.67123 7.87508 3.28929 7.40398 3.52167 6.75007H10.4785C10.7108 7.40398 11.3289 7.87508 12.0626 7.87508C12.9946 7.87508 13.7501 7.11956 13.7501 6.18756C13.7501 5.25556 12.9946 4.50004 12.0626 4.50004ZM4.75004 15.0766L6.53213 17.7495C6.75467 18.0835 7.24546 18.0835 7.46835 17.7495L9.25009 15.0766V7.87508H4.75004V15.0766Z" fill="#2E3A59"/>
-                                </svg>
-                                <label>Ataque especial</label>
-                                <input type="number" placeholder="00" {...register("ataqueespecial")} />
-                                <span>{errors.ataqueespecial?.message}</span>
+                                <NumberInput name="specialattack" placeholder="00" label="Ataque especial" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <svg className="statistics" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 0.25C4.02938 0.25 0 4.27938 0 9.25C0 10.9 0.445313 12.4456 1.22063 13.775C1.39594 14.0756 1.73 14.25 2.07812 14.25H15.9219C16.27 14.25 16.6041 14.0756 16.7794 13.775C17.5547 12.4456 18 10.9 18 9.25C18 4.27938 13.9706 0.25 9 0.25ZM14.1 5.70031L10.7078 10.2231C10.8894 10.5241 11 10.8728 11 11.25C11 11.6163 10.8944 11.9547 10.7225 12.25H7.2775C7.10563 11.9547 7 11.6163 7 11.25C7 10.1453 7.89531 9.25 9 9.25C9.17656 9.25 9.34437 9.28 9.5075 9.32312L12.9 4.79969C13.1494 4.46969 13.6188 4.40219 13.9503 4.64969C14.2813 4.89844 14.3488 5.36875 14.1 5.70031V5.70031Z" fill="#2E3A59"/>
-                                </svg>
-                                <label>Velocidade</label>
-                                <input type="number" placeholder="00" {...register("velocidade")} />
-                                <span>{errors.velocidade?.message}</span>
+                                <NumberInput name="velocity" placeholder="00" label="Velocidade" register={register} errors={errors}/>
                             </div>
                         </div>
                     </div>
@@ -176,7 +138,7 @@ return (
                         <Button 
                             type="submit" 
                             text="CRIAR POKEMON"
-                            onClick={() => {dispatch(addPokemon(inputs))}} />
+                        />
                     </div>
                 </form>
                 

@@ -12,7 +12,7 @@ const Dropdown = ({ options, multiple }) => {
                 </option>
                 {options && options.map((option, index) => (
                     <option className="dropdown__option" value={option.value}>
-                        {option.text}
+                        teste
                     </option>
                 ))}
             </select>

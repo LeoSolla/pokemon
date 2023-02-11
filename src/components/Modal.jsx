@@ -1,8 +1,11 @@
 import React, { } from 'react';
 import Button from './Button';
 import closeIcon from '../assets/images/close.png';
+import { useDispatch } from 'react-redux';
+import { deletePokemon } from '../features/Pokemons';
 
 const Modal = ({ pokemon, openModal, close }) => {
+    const dispatch = useDispatch();
     
 return (
     <>
@@ -13,7 +16,8 @@ return (
                     <div className="modal__main">
                         <div className="modal__photo"></div>
                         <div className="modal__name">
-                           {pokemon.nome}
+                           {pokemon.name}
+                           {console.log(pokemon)}
                         </div>
                         <div className="modal__info">
                             <div className="modal__field">
@@ -40,6 +44,10 @@ return (
                             <div className="separator"></div>
                                 <label className="label_title">Habilidades</label>
                             <div className="separator"></div>
+                        </div>
+
+                        <div className="modal__abilities">
+                            <label>{pokemon.habilidade1}, {pokemon.habilidade2}, {pokemon.habilidade3}, {pokemon.habilidade4}</label>
                         </div>
 
 
@@ -96,6 +104,7 @@ return (
                             </div>
                             <div className="modal__Remove">
                                 <Button type="submit" text="CAPTURAR POKEMON" />
+                                <Button type="submit" text="REMOVER POKEMON" onClick={() => {dispatch(deletePokemon(pokemon.id))}}/>
                             </div>                        
                         </div>
 

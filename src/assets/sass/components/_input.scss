@@ -5,6 +5,7 @@
     border: 2px solid $color-neutral-400;
     border-radius: 3px;
     overflow: hidden;
+    font-family: 'Open Sans';
 
     &::placeholder {
         font-weight: 600;
@@ -16,6 +17,12 @@
     &__container {
         display: flex;
         flex-direction: column;
+
+        .image {
+            width: 5%;
+            vertical-align: middle;
+            margin: 0 11px 3px 0;
+        }
     }
 
     &__label {
@@ -24,6 +31,8 @@
         font-weight: bold;
         font-size: 1.2rem;
         line-height: 1.6rem;
+        color: #2E3A59;
+        text-transform: uppercase;
     }
 
     &__suffix {
