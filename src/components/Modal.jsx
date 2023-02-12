@@ -4,7 +4,7 @@ import closeIcon from '../assets/images/close.png';
 import { useDispatch } from 'react-redux';
 import { deletePokemon } from '../features/Pokemons';
 
-const Modal = ({ pokemon, openModal, close }) => {
+const Modal = ({ pokemon, openModal, close, edited }) => {
     const dispatch = useDispatch();
     
 return (
@@ -25,12 +25,12 @@ return (
                                 <span>{pokemon.hp} / {pokemon.hp}</span>
                             </div>
                             <div className="modal__field">
-                                <label>Peso</label>
-                                <span>{pokemon.peso}</span>
+                                <label>Altura</label>
+                                <span>{`${pokemon.height * 10} m`}</span>
                             </div>
                             <div className="modal__field">
-                                <label>Altura</label>
-                                <span>{pokemon.altura}</span>
+                                <label>Peso</label>
+                                <span>{`${pokemon.weight / 10} kg`}</span>
                             </div>
                         </div>
                         <div className="modal__labelField">
@@ -39,6 +39,13 @@ return (
                             <div className="separator"></div>
                         </div>
 
+                        <div className="modal__types">
+                            {pokemon.type.map((item, index) => (
+                                <div className={`modal__colors ${item.name}`} key={index}>
+                                    <span>{item.label}</span>
+                                </div>
+                            ))}                            
+                        </div>
 
                         <div className="modal__labelField">
                             <div className="separator"></div>
@@ -47,13 +54,13 @@ return (
                         </div>
 
                         <div className="modal__abilities">
-                            <label>{pokemon.habilidade1}, {pokemon.habilidade2}, {pokemon.habilidade3}, {pokemon.habilidade4}</label>
+                            <label>{pokemon.ability1}, {pokemon.ability2}, {pokemon.ability3}, {pokemon.ability4}</label>
                         </div>
 
 
                         <div className="modal__labelField">
                             <div className="separator"></div>
-                                <label className="label_title">Estastíticas</label>
+                                <label className="label_title">Estatísticas</label>
                             <div className="separator"></div>
                         </div>
 
@@ -66,7 +73,7 @@ return (
                                     <label>Ataque</label>
                                 </div>
                                 <div className="statistics__number">
-                                    <span>45</span>
+                                    <span>{pokemon.attack}</span>
                                 </div>
                             </div>
                             <div className="modal__labelsField">
@@ -77,7 +84,7 @@ return (
                                     <label>Defesa especial</label>
                                 </div>
                                 <div className="statistics__number">
-                                    <span>22</span>
+                                    <span>{pokemon.specialdefense}</span>
                                 </div>
                             </div>
                             <div className="modal__labelsField">
@@ -88,7 +95,7 @@ return (
                                     <label>Ataque especial</label>
                                 </div>
                                 <div className="statistics__number">
-                                    <span>33</span>
+                                    <span>{pokemon.specialattack}</span>
                                 </div>
                             </div>
                             <div className="modal__labelsField">
@@ -99,12 +106,15 @@ return (
                                     <label>Velocidade</label>
                                 </div>
                                 <div className="statistics__number">
-                                    <span>29</span>
+                                    <span>{pokemon.velocity}</span>
                                 </div>
                             </div>
-                            <div className="modal__Remove">
-                                <Button type="submit" text="CAPTURAR POKEMON" />
-                                <Button type="submit" text="REMOVER POKEMON" onClick={() => {dispatch(deletePokemon(pokemon.id))}}/>
+                            <div className="modal__buttons">
+                                {!edited ? (
+                                    <button type="submit" className="capture"/>
+                                ) : (
+                                    <Button type="submit" className="capture" text="LIBERAR POKEMON" onClick={() => {dispatch(deletePokemon(pokemon.id)); close()}}/>
+                                )}                                
                             </div>                        
                         </div>
 

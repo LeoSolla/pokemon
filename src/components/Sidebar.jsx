@@ -9,20 +9,21 @@ const Sidebar = () => {
     const [newModal, setNewModal] = useState(false);
     const [modal, setModal] = useState(false);
     const [data, setData] = useState();
+    const [edited, setEdited] = useState(true);
     const pokemonList = useSelector((state) => state.pokemons.value);
 
     const getPokemon = (item) => {
-        setModal(true)
-        setData(item)
+        setModal(true);
+        setData(item);
     };
-    
+
     return (
         <div className="sidebar">
             {pokemonList.map((item, index) => {
                 return (
                     <div className="sidebar__item" key={index} onClick={() => getPokemon(item)}>
                         <div className="sidebar__avatar">
-                            X
+                            ?
                         </div>
                     </div>
                 );
@@ -35,11 +36,12 @@ const Sidebar = () => {
             )}
             <Modal 
                 pokemon={data} 
-                openModal={modal} 
+                openModal={modal}
+                edited={edited} 
                 close={() => setModal(false)}
             />
             <ModalNewPokemon 
-                open={newModal} 
+                open={newModal}
                 close={() => setNewModal(false)}
             />
         </div>

@@ -10,9 +10,9 @@ const Dropdown = ({ options, multiple }) => {
                 <option className="dropdown__option" value="">
                     Selecione o(s) tipo(s)
                 </option>
-                {options && options.map((option, index) => (
-                    <option className="dropdown__option" value={option.value}>
-                        teste
+                {options.map(({ id, value, name }) => (
+                    <option className="dropdown__option" key={id} value={value}>
+                        {name}
                     </option>
                 ))}
             </select>

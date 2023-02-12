@@ -36,6 +36,7 @@
         border-radius: 12px;
         position: relative;
         background: linear-gradient(90deg, #43E97B 0%, #38F9D7 100%);
+        padding-top: 15%;
 
         &::-webkit-scrollbar {
             display: none;
@@ -43,9 +44,6 @@
     }
 
     &__photo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         border-radius: 50%;     
         background: #F7F9FC;
         border: 4px solid #00D68F; 
@@ -58,18 +56,92 @@
         margin-right: auto;
         left: 0;
         right: 0;
-        top: 32px;
+        top: -125px;
     }
 
     &__main {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 125%;
+        margin-top: 95%;
         background: #F7F9FC;
         border-radius: 24px 24px 0px 0px;
-        padding-top: 150px;
+        padding-top: 135px;
         width: 100%;
+        position: relative;
+        padding-bottom: 50%;
+    }
+
+    &__types {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .modal__colors {
+            text-transform: uppercase;
+            border-radius: 42px;
+            color: #FFF;
+            padding: 10px 26px;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 16px;
+            margin-left: 11px;
+        }
+        .normal {
+            background-color: #C4C0B4;
+            color: #101426;
+        }
+        .veneno {
+            background-color: #924990;
+        }
+        .lutador {
+            background-color: #852816;
+        }
+        .inseto {
+            background: #87950C;
+        }
+        .sombrio {
+            background: #413831;
+        }
+        .dragrao {
+            background: #7361D1;
+        }
+        .eletrico {
+            background: #E08D00;
+        }
+        .fada {
+            background: #E29FE6;
+        }
+        .fogo {
+            background: #CF2C03;
+        }
+        .voador {
+            background: #8FA4FF;
+        }
+        .fantasma {
+            background: #6969AF;
+        }
+        .planta {
+            background: #67AF32;
+        }
+        .terra {
+            background: #C5A455;
+        }
+        .gelo {
+            background: #B4EDF8;
+        }
+        .psiquico {
+            background: #E25484;
+        }
+        .pedra {
+            background: #5E491C;
+        }
+        .metalico {
+            background: #7F8488;
+        }
+        .agua {
+            background: #3B9BF1;
+        }    
     }
 
     &__name {
@@ -79,6 +151,8 @@
         font-size: 18px;
         line-height: 24px;
         color: #2E3A59;
+        margin: 16px 0 36px 0;
+        text-transform: uppercase;
     }
 
     &__info {
@@ -86,6 +160,11 @@
         flex-direction: row;
         width: 100%;
         justify-content: center;
+
+        div:nth-child(2) {
+            border-right: 1px solid #C5CEE0;
+            border-left: 1px solid #C5CEE0;
+        }
     }
 
     &__field {
@@ -94,13 +173,26 @@
         flex-direction: column;
         width: 25%;
         align-items: center;
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        span {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 24px;
+            color: #2E3A59;
+        }
     }
 
     &__labelField {
         width: 88%;
         display: flex;
         align-items: center;
-        padding: 30px 0 18px 0;
+        padding: 30px 0 30px 0;
 
         .separator {
             background: #C5CEE0;
@@ -121,17 +213,27 @@
         width: 88%;
         display: flex;
         flex-direction: column;        
+
+        .statistics__number {
+            font-size: 15px;
+            line-height: 24px;
+        }
     }
 
-    &__Remove {
-        width: 100%;
-        height: 120px;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #F7F9FC;
-        padding-bottom: 25px;
+    &__buttons {
+        position: fixed;
+        top: 65%;
+        left: 0;
+        right: 0;
+        text-align: center;
+
+        .capture {
+            width: 80px;
+            height: 80px;
+            background: url('../../images/pokeball.png') center;
+            background-repeat: no-repeat;
+            border: 0;
+        }
     }
 
     &__labelsField {
@@ -148,21 +250,23 @@
         color: #2E3A59;
     }
 
-    span {
-        font-family: 'Open Sans';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 12px;
-        line-height: 24px;
-        color: #FF3D71;
-        position: relative;
-        display: flex;
-        flex-direction: row;
-    }
-
     .statistics {
-        vertical-align: middle;
         display: inline-flex;
         margin-right: 12px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .modal {
+            &__main {
+                margin-top: 80%;
+            }
+            &__content {
+                width: 100%;
+                height: 100vh;
+            }
+        }
+        .modal__buttons {
+            top: 85%;
+        }
     }
 }

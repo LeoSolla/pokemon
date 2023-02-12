@@ -1,15 +1,16 @@
 import React, { } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { addPokemon } from '../features/Pokemons';
+import { pokeTypes } from '../data/PokeTypes';
 import NumberInput from './NumberInput';
 import * as yup from "yup";
 import closeIcon from '../assets/images/close.png';
 import Button from './Button';
 import PokeData from '../data/PokeData';
 import TextInput from './TextInput';
-import Dropdown from './Dropdown';
+import Select from 'react-select';
 
 const schema = yup.object({
     name: yup.string().required("O Nome é obrigatório."),
@@ -29,14 +30,23 @@ const schema = yup.object({
 
 const ModalNewPokemon = ({ open, close }) => {
     const dispatch = useDispatch();
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { control, register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
+
+    const options = pokeTypes.map((type) => ({
+        label: type.name,
+        value: type.id,
+        name: type.value,
+      }));
     
     const onSubmit = (data) => {
-        console.log(data);
-        dispatch(addPokemon(PokeData(data)));
-    }
+        const newPokemon = PokeData(data);
+        console.log(newPokemon);
+        dispatch(addPokemon(newPokemon));
+        reset();
+        close();
+      };
 
 return (
     <>
@@ -69,10 +79,10 @@ return (
                                 <NumberInput name="hp" placeholder="HP" label="Hp" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="height" placeholder="Peso" label="Peso" suffix="Kg" register={register} errors={errors}/>
+                                <NumberInput name="weight" placeholder="Peso" label="Peso" suffix="Kg" register={register} errors={errors}/>
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="weight" placeholder="Altura" label="Altura" suffix="Cm" register={register} errors={errors}/>
+                                <NumberInput name="height" placeholder="Altura" label="Altura" suffix="Cm" register={register} errors={errors}/>
                             </div>
                         </div>
 
@@ -85,7 +95,18 @@ return (
 
                         <div className="newModal__formType">
                             <div className="newModal__field">
-                               <Dropdown />
+                                <Controller
+                                    name="type"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <Select
+                                            placeholder="Selecione o(s) tipo(s)"
+                                            {...field}
+                                            isMulti
+                                            options={options}
+                                        />
+                                    )}
+                                />
                             </div>
                         </div>
 
@@ -138,6 +159,7 @@ return (
                         <Button 
                             type="submit" 
                             text="CRIAR POKEMON"
+                            disabled={errors !== 0}
                         />
                     </div>
                 </form>
