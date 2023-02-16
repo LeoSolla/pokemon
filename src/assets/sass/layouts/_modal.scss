@@ -34,7 +34,7 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
         border-radius: 12px;
-        position: relative;
+        position: fixed;
         background: linear-gradient(90deg, #43E97B 0%, #38F9D7 100%);
         padding-top: 15%;
 
@@ -58,18 +58,29 @@
         right: 0;
         top: -125px;
     }
+    
+    &__sprite {
+        position: absolute;
+        left: 20%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        img {
+            width: 250%;
+        }
+    }
 
     &__main {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 95%;
         background: #F7F9FC;
         border-radius: 24px 24px 0px 0px;
         padding-top: 135px;
         width: 100%;
-        position: relative;
-        padding-bottom: 50%;
+        position: absolute;
+        padding-bottom: 150px;
+        top: 150px;
     }
 
     &__types {
@@ -91,55 +102,72 @@
             background-color: #C4C0B4;
             color: #101426;
         }
-        .veneno {
+        .veneno,
+        .poison {
             background-color: #924990;
         }
-        .lutador {
+        .lutador,
+        .fighting {
             background-color: #852816;
         }
-        .inseto {
+        .inseto,
+        .bug {
             background: #87950C;
         }
-        .sombrio {
+        .sombrio,
+        .dark {
             background: #413831;
         }
-        .dragrao {
+        .dragrao,
+        .dragon {
             background: #7361D1;
         }
-        .eletrico {
+        .eletrico,
+        .eletric {
             background: #E08D00;
         }
-        .fada {
+        .fada,
+        .fairy {
             background: #E29FE6;
         }
-        .fogo {
+        .fogo,
+        .fire {
             background: #CF2C03;
         }
-        .voador {
+        .voador,
+        .flying {
             background: #8FA4FF;
         }
-        .fantasma {
+        .fantasma,
+        .ghost {
             background: #6969AF;
         }
-        .planta {
+        .planta,
+        .grass {
             background: #67AF32;
         }
-        .terra {
+        .terra,
+        .ground {
             background: #C5A455;
         }
-        .gelo {
+        .gelo,
+        .ice {
             background: #B4EDF8;
         }
-        .psiquico {
+        .psiquico,
+        .psychic {
             background: #E25484;
         }
-        .pedra {
+        .pedra,
+        .rock {
             background: #5E491C;
         }
-        .metalico {
+        .metalico,
+        .steel {
             background: #7F8488;
         }
-        .agua {
+        .agua,
+        .water {
             background: #3B9BF1;
         }    
     }
@@ -255,14 +283,22 @@
         margin-right: 12px;
     }
 
+    button {
+        cursor: pointer;
+    }
+
     @media screen and (max-width: 768px) {
         .modal {
             &__main {
                 margin-top: 80%;
+                height: 100vh;
+                padding-bottom: 0;
+                top: inherit;
             }
             &__content {
                 width: 100%;
                 height: 100vh;
+                padding-top: 0;
             }
         }
         .modal__buttons {

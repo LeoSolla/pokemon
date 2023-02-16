@@ -28,7 +28,7 @@ const schema = yup.object({
     velocity: yup.string().required("A Velocidade é obrigatória."),
   }).required();
 
-const ModalNewPokemon = ({ open, close }) => {
+const ModalNewPokemon = ({ open, close, isEdited }) => {
     const dispatch = useDispatch();
     const { control, register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -42,7 +42,6 @@ const ModalNewPokemon = ({ open, close }) => {
     
     const onSubmit = (data) => {
         const newPokemon = PokeData(data);
-        console.log(newPokemon);
         dispatch(addPokemon(newPokemon));
         reset();
         close();
@@ -73,16 +72,42 @@ return (
                     <div className="newModal__formContent">
                         <div className="newModal__formPokemon">
                             <div className="newModal__field">
-                                <TextInput name="name" placeholder="Nome" label="Nome" register={register} errors={errors}/>
+                                <TextInput 
+                                    name="name" 
+                                    placeholder="Nome" 
+                                    label="Nome" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>                            
                             <div className="newModal__field">
-                                <NumberInput name="hp" placeholder="HP" label="Hp" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="hp" 
+                                    placeholder="HP" 
+                                    label="Hp" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="weight" placeholder="Peso" label="Peso" suffix="Kg" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="weight" 
+                                    placeholder="Peso" 
+                                    label="Peso" 
+                                    suffix="Kg" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="height" placeholder="Altura" label="Altura" suffix="Cm" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="height" 
+                                    placeholder="Altura" 
+                                    label="Altura" 
+                                    suffix="Cm" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                         </div>
 
@@ -100,6 +125,7 @@ return (
                                     control={control}
                                     render={({ field }) => (
                                         <Select
+                                            classNamePrefix='filter'
                                             placeholder="Selecione o(s) tipo(s)"
                                             {...field}
                                             isMulti
@@ -118,16 +144,36 @@ return (
 
                         <div className="newModal__formAbilities">
                             <div className="newModal__field">
-                                <TextInput name="ability1" placeholder="Habilidade 1" register={register} errors={errors}/>
+                                <TextInput 
+                                    name="ability1" 
+                                    placeholder="Habilidade 1" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <TextInput name="ability2" placeholder="Habilidade 2" register={register} errors={errors}/>
+                                <TextInput 
+                                    name="ability2" 
+                                    placeholder="Habilidade 2" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <TextInput name="ability3" placeholder="Habilidade 3" register={register} errors={errors}/>
+                                <TextInput 
+                                    name="ability3" 
+                                    placeholder="Habilidade 3" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <TextInput name="ability4" placeholder="Habilidade 4" register={register} errors={errors}/>
+                                <TextInput 
+                                    name="ability4" 
+                                    placeholder="Habilidade 4" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                         </div>
 
@@ -139,19 +185,49 @@ return (
 
                         <div className="newModal__formStatistics">
                             <div className="newModal__field">
-                                <NumberInput name="defense" placeholder="00" label="Defesa" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="defense" 
+                                    placeholder="00" 
+                                    label="Defesa" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="attack" placeholder="00" label="Ataque" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="attack" 
+                                    placeholder="00" 
+                                    label="Ataque" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="specialdefense" placeholder="00" label="Defesa especial" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="specialdefense" 
+                                    placeholder="00" 
+                                    label="Defesa especial" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="specialattack" placeholder="00" label="Ataque especial" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="specialattack" 
+                                    placeholder="00" 
+                                    label="Ataque especial" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                             <div className="newModal__field">
-                                <NumberInput name="velocity" placeholder="00" label="Velocidade" register={register} errors={errors}/>
+                                <NumberInput 
+                                    name="velocity" 
+                                    placeholder="00" 
+                                    label="Velocidade" 
+                                    register={register} 
+                                    errors={errors}
+                                />
                             </div>
                         </div>
                     </div>
@@ -159,6 +235,7 @@ return (
                         <Button 
                             type="submit" 
                             text="CRIAR POKEMON"
+                            isEdited={true}
                             disabled={errors !== 0}
                         />
                     </div>

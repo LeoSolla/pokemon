@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = ({ className, label, placeholder, name, register, errors }) => {
+const TextInput = ({ className, label, placeholder, value, name, register, errors }) => {
 
     return (
         <div className={`${className} input__container`}>
@@ -9,7 +9,7 @@ const TextInput = ({ className, label, placeholder, name, register, errors }) =>
                     {label}
                 </label>
             )}
-            <input className="input" type="text" placeholder={placeholder} name={name} {...register(name)}/>
+            <input className="input" type="text" placeholder={placeholder} name={name} value={value} {...register(name)}/>
             {errors[name] && <span className="error">{errors[name].message}</span>}
         </div>
     )

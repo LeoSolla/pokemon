@@ -134,6 +134,25 @@
         
     }
 
+    .filter {
+        &__control {
+            border: 2px solid #E4E9F2;
+            border-radius: 3px;
+        }
+
+        &__indicator-separator {
+            display: none;
+        }
+
+        &__value-container {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 24px;
+        }
+      }
+
     
 
     select {

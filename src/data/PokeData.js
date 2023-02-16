@@ -1,7 +1,7 @@
 import getRandomInt from '../helpers/getRandomInt';
 
 const PokeData = (data) => {
-    const randomId = getRandomInt(1,807);
+    const randomId = getRandomInt(2000, 3000);
     return {
         id: randomId,
         name: data.name,
@@ -17,7 +17,8 @@ const PokeData = (data) => {
         defense: data.defense,
         specialattack: data.specialattack,
         specialdefense: data.specialdefense,
-        velocity: data.velocity
+        velocity: data.velocity,
+        create: true,    
       };
   };
   

@@ -8,8 +8,67 @@
     background-size: 64px;
 }
 
+.ashHide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: none;
+}
+
 .person {
     width: 64px;
     height: 64px;
     cursor: pointer;
+    position: relative;
 }
+
+.ashWalk {
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 5.5rem;
+    height: 7rem;
+    animation: ashMove 0.8s linear infinite;
+    animation-duration: 0.8s;
+}
+
+.tooltip {
+    position: absolute;
+    top: 39%;
+    margin-left: 7px;
+    animation: fadeIn 0.4s;
+    -webkit-animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translate3d(0, 2rem, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes ashMove {
+    0% {
+        background-image: url("../../images/ashRightLeg.png");
+    }
+    25% {
+        background-image: url("../../images/ashStop.png");
+    }
+    50% {
+        background-image: url("../../images/ashLeftLeg.png");
+    } 
+    75% {
+        background-image: url("../../images/ashStop.png");
+    }   
+    100% {
+        background-image: url("../../images/ashRightLeg.png")
+    }
+}
+  
+  
+  

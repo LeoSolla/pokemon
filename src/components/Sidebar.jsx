@@ -11,7 +11,7 @@ const Sidebar = () => {
     const [data, setData] = useState();
     const [edited, setEdited] = useState(true);
     const pokemonList = useSelector((state) => state.pokemons.value);
-
+    
     const getPokemon = (item) => {
         setModal(true);
         setData(item);
@@ -21,10 +21,10 @@ const Sidebar = () => {
         <div className="sidebar">
             {pokemonList.map((item, index) => {
                 return (
-                    <div className="sidebar__item" key={index} onClick={() => getPokemon(item)}>
-                        <div className="sidebar__avatar">
-                            ?
-                        </div>
+                    <div className="sidebar__item" key={index} onClick={() => getPokemon(item)} style={{backgroundImage: `url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png")`}}>
+                        {item?.create ? (
+                            <div className="sidebar__avatarcreate"> ? </div>):(<div className="sidebar__avatar"></div>
+                        )}   
                     </div>
                 );
             })}

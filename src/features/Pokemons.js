@@ -15,5 +15,5 @@ export const pokemonSlice = createSlice({
     },
 });
 
-export const { addPokemon, deletePokemon } = pokemonSlice.actions;
+export const { addPokemon, deletePokemon, addPokemonAPI } = pokemonSlice.actions;
 export default pokemonSlice.reducer;
